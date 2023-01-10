@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     },
                 },
                 y:{
-                    max:2,
+                    max:1,
                     min:0,
                     grid:{
                         display: false,
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 
     setInterval(()=>{
-        fetch('http://localhost:8000/iotVehiculos/enviarDatos?cantidad=5')
+        fetch('http://localhost:8000/iotVehiculos/enviarDatos?cantidad=10')
         .then(response=>response.json())
         .then(data => {
             console.log(data)

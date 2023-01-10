@@ -13,13 +13,14 @@ def index(request):
 def registrarDatos(request):
     datoMensaje = str(request.GET.get('mensaje'))
     datoTiempo = str(request.GET.get('tiempo'))
-    if datoMensaje == '-':
+    if datoMensaje == 'N':
         datoMensaje = '0'
-    elif datoMensaje == 'N':
+    elif datoMensaje == 'Y':
         datoMensaje = '1'
+    if datoMensaje == '1' or datoMensaje == '0':
+        estadoVehiculo(registroTiempo=str(request.GET.get('tiempo')),registroInformacion=datoMensaje).save()
     else:
-        datoMensaje = '2'
-    estadoVehiculo(registroTiempo=str(request.GET.get('tiempo')),registroInformacion=datoMensaje).save()
+        pass
     return JsonResponse({
         'resp':'ok'
     })
@@ -31,7 +32,7 @@ def enviarDatos(request):
     arregloTiempos = []
     arregloInfos = []
     for reg in ultimos_registros:
-        arregloTiempos.append(reg.registroTiempo)
+        arregloTiempos.append(':'.join(reg.registroTiempo.split(':')[1].split('-')))
         arregloInfos.append(reg.registroInformacion)
     return JsonResponse({
         'informacionVehiculo':arregloInfos,
