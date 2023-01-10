@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
     let tablaVendedor = new Chart(document.getElementById('grafVentas'),{
-        type:'bar',
+        type:'line',
         options:{
             scales:{
                 x:{
