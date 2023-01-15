@@ -51,12 +51,15 @@ def on_message(client, userdata, msg):
 			estado.append('-')
 	if topic_arr[2] == "encendido":
 		resultado = str(msg.payload.decode())
-		estado.append(msg.payload.decode())
-	timestamp.append(datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S"))
+		resultado_arr = resultado.split(',') 
+		estado.append(resultado_arr[1])
+		# timestamp.append(datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S"))
+		timestamp.append(resultado_arr[0])
 
-	print(estado,timestamp)
-	res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado}&tiempo={datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S")}')
-	print(res)
+		print(estado,timestamp)
+		#res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado}&tiempo={datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S")}')
+		res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado_arr[1]}&tiempo={resultado_arr[0]}')
+		print(res)
 
 
 
@@ -64,8 +67,8 @@ if __name__ == '__main__':
 	client = connect_mqtt()
 	client.loop_start()
 
-	subscribe(client, "auto/+/encendido")
-	subscribe(client, "auto/+/conectado")
+	subscribe(client, "vehiculos/+/encendido")
+	subscribe(client, "vehiculos/+/conectado")
 	while True:
 		time.sleep(1)
 

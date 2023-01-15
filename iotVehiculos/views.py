@@ -32,7 +32,7 @@ def enviarDatos(request):
     arregloTiempos = []
     arregloInfos = []
     for reg in ultimos_registros:
-        arregloTiempos.append(':'.join(reg.registroTiempo.split(':')[1].split('-')))
+        arregloTiempos.append(reg.registroTiempo.split('T')[1])
         arregloInfos.append(reg.registroInformacion)
     return JsonResponse({
         'informacionVehiculo':arregloInfos,

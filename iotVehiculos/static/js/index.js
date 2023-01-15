@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded',()=>{
-    let tablaVendedor = new Chart(document.getElementById('grafVentas'),{
+    let tablaVendedor = new Chart(document.getElementById('grafEncendido'),{
         type:'line',
         options:{
             scales:{
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         data:{
             labels:[],
             datasets:[{
-                label:'Datos del vehiculo',
+                label:'Encendido del vehiculo',
                 backgroundColor:'#0275d8',
                 data:[],
             }]
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     })
 
     setInterval(()=>{
-        fetch('http://localhost:8000/iotVehiculos/enviarDatos?cantidad=10')
+        fetch('http://localhost:8000/iotVehiculos/enviarDatos?cantidad=20')
         .then(response=>response.json())
         .then(data => {
             console.log(data)
