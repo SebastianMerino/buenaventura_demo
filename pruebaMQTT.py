@@ -53,7 +53,6 @@ def on_message(client, userdata, msg):
 		resultado = str(msg.payload.decode())
 		resultado_arr = resultado.split(',') 
 		estado.append(resultado_arr[1])
-		# timestamp.append(datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S"))
 		timestamp.append(resultado_arr[0])
 
 		print(estado,timestamp)
