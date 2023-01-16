@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 import subprocess
 from .models import estadoVehiculo
 import random
+import csv
 
 subprocess.Popen(["python", "pruebaMQTT.py"])
 
@@ -38,3 +39,17 @@ def enviarDatos(request):
         'informacionVehiculo':arregloInfos,
         'registroTiempos':arregloTiempos
     })
+
+def descargarDatos(request):
+    output = []
+    response = HttpResponse (content_type='text/csv')
+    writer = csv.writer(response)
+    query_set = estadoVehiculo.objects.all()
+    #Header
+    writer.writerow(['Timestamp', 'Encendido'])
+    for entry in query_set:
+        output.append([entry.registroTiempo, entry.registroInformacion])
+    #CSV Data
+    writer.writerows(output)
+    return response
+

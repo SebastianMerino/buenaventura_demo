@@ -57,7 +57,7 @@ def on_message(client, userdata, msg):
 		timestamp.append(resultado_arr[0])
 
 		print(estado,timestamp)
-		#res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado}&tiempo={datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S")}')
+		# res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado}&tiempo={datetime.datetime.now().strftime("%d-%m-%Y:%H-%M-%S")}')
 		res = requests.get(f'http://localhost:8000/iotVehiculos/registrarDatos?mensaje={resultado_arr[1]}&tiempo={resultado_arr[0]}')
 		print(res)
 
